@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - apt-get update -y
+      - apt-get install -y build-essential cmake
+  pre_build:
+    commands:
+      - mkdir build || true && cd build
+      - cmake ..
+  build:
+    commands:
+      - cmake --build .
+      - ls
+artifacts:
+  files:
+    - build

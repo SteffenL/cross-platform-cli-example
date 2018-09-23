@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - ./scripts/install_chocolatey.ps1
+      - choco install -y cmake microsoft-build-tools
+      - refreshenv
+  pre_build:
+    commands:
+      - mkdir build; cd build
+      - &cmake ..
+  build:
+    commands:
+      - &cmake --build .
+      - ls
+artifacts:
+  files:
+    - build
