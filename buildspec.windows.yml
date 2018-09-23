@@ -3,17 +3,16 @@ version: 0.2
 phases:
   install:
     commands:
-      - ./scripts/install_chocolatey.ps1
-      - choco install -y cmake microsoft-build-tools
-      - refreshenv
+      - choco install -y cmake
   pre_build:
     commands:
       - mkdir build; cd build
-      - &cmake ..
+      - '&"C:\Program Files\CMake\bin\cmake.exe" ..'
   build:
     commands:
-      - &cmake --build .
-      - ls
+      - '&"C:\Program Files\CMake\bin\cmake.exe" --build . --config RelWithDebInfo'
+      - ./RelWithDebInfo/app.exe
 artifacts:
   files:
-    - build
+    - 'build/RelWithDebInfo/**/*'
+  discard-paths: yes
